@@ -15,8 +15,6 @@ Here you will find two main projects developed throughout the course, each demon
     <p> - JS files contain the source code for the projects.</p>
 </details>
 
-
-
 ## ⚙️ Requirements
 
 - A WebGL-compatible browser.
