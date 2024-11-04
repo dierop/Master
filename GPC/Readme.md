@@ -9,9 +9,11 @@ Here you will find two main projects developed throughout the course, each demon
  - Proyecto final: `webgl/proyecto.html` & `webgl/js/proyecto.js` & resources. Game based on a laberint.
  - Robot arm: Initial Version`webgl/practica2.html` & `webgl/js/practica2.js`. Advanced version  `webgl/practica4.html` & `webgl/js/practica4.js`
 
-> [!TIP]
-> HTML are executable files, with the necessary imports
-> js files contain the source code for the projects
+<details>
+    <summary>💡 Tip</summary>
+    <p> - HTML files are executable files with the necessary imports.</p>
+    <p> - JS files contain the source code for the projects.</p>
+</details>
 
 
 
