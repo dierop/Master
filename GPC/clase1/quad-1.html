@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL Gradiente en Pantalla Completa</title>
+    <style>
+        body {
+            background-color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        canvas {
+            display: block;
+            background-color: white;
+            border: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="glCanvas" width="800" height="600"></canvas>
+
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById("glCanvas");
+            var gl = canvas.getContext("webgl");
+
+            if (!gl) {
+                alert("Error: Tu navegador no soporta WebGL.");
+                return;
+            }
+
+            // Vertex shader simple que solo pasa las posiciones a la pantalla
+            var vertexShaderSource = `
+                attribute vec2 a_position;
+                void main() {
+                    gl_Position = vec4(a_position, 0.0, 1.0);
+                }
+            `;
+
+            // Fragment shader que usa gl_FragCoord para crear un gradiente
+            var fragmentShaderSource = `
+                precision mediump float;
+                uniform vec2 u_resolution;
+
+                void main() {
+                    // Normalizar las coordenadas del fragmento
+                    vec2 uv = gl_FragCoord.xy / u_resolution;
+                    // uv = pow(st, vec2(2.0));
+
+                    // if (uv.x < 1.0) {
+                    //     gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+                    // } else {
+                    //     gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+                    // }
+
+                    if (uv.x**uv.x + uv.y*uv.y <= 1.0) {
+                        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+                    } else {
+                        gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+                    }
+					// if(uv.x>0.5 && uv.y>0.5)
+					// 	gl_FragColor = vec4(1.0 ,0.0,0.0, 1.0);
+					// else
+					// if(uv.x<0.5 && uv.y>0.5)
+					// 	gl_FragColor = vec4(0.0 ,1.0,0.0, 1.0);
+					// else
+					// if(uv.x<0.5 && uv.y<0.5)
+					// 	gl_FragColor = vec4(0.0 ,0.0,1.0, 1.0);
+					// else
+					// 	gl_FragColor = vec4(1.0 ,1.0,1.0, 1.0);
+                }
+            `;
+
+            function createShader(gl, type, source) {
+                var shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error("Error al compilar el shader:", gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            var vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            var fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            var program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error("Error al enlazar el programa:", gl.getProgramInfoLog(program));
+                return;
+            }
+            gl.useProgram(program);
+
+            // Definir los datos del Quad que ocupa toda la pantalla
+            var positions = new Float32Array([
+                -1.0,  1.0,  // Vértice superior izquierdo
+                 1.0,  1.0,  // Vértice superior derecho
+                -1.0, -1.0,  // Vértice inferior izquierdo
+                 1.0, -1.0   // Vértice inferior derecho
+            ]);
+
+            // Crear un buffer para las posiciones
+            var positionBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+            var positionAttributeLocation = gl.getAttribLocation(program, "a_position");
+            gl.enableVertexAttribArray(positionAttributeLocation);
+            gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+            // Pasar la resolución al shader
+            var resolutionUniformLocation = gl.getUniformLocation(program, "u_resolution");
+            gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
+
+            // Limpiar la pantalla y dibujar el Quad
+            gl.clear(gl.COLOR_BUFFER_BIT);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        };
+    </script>
+</body>
+</html>

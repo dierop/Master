@@ -1,0 +1,8 @@
+Model Information:
+* title:	Cyberpunk Room Flooring
+* source:	https://sketchfab.com/3d-models/cyberpunk-room-flooring-dd1af76d296441c7ae6bbb48696e7a9b
+* author:	riach (https://sketchfab.com/riach)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works

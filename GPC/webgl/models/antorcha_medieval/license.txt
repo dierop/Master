@@ -1,0 +1,11 @@
+Model Information:
+* title:	Antorcha_Medieval
+* source:	https://sketchfab.com/3d-models/antorcha-medieval-104bce1de9ba40f0ab82cf2fe30fef6b
+* author:	danielrodriguezcarmona (https://sketchfab.com/danielrodriguezcarmona)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Antorcha_Medieval" (https://sketchfab.com/3d-models/antorcha-medieval-104bce1de9ba40f0ab82cf2fe30fef6b) by danielrodriguezcarmona (https://sketchfab.com/danielrodriguezcarmona) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

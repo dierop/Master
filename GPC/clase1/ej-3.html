@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL Triángulo Básico</title>
+    <style>
+        body { 
+            background-color: grey; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0;
+        }
+        canvas { 
+            background-color: white; 
+            border: 1px solid black; 
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="300"></canvas>
+
+    <script>
+	
+		// En este ejemplo agregamos una variable global tiempo, que se la pasamos al vertex shader
+		
+        window.onload = function() {
+            // 1. Obtener el contexto WebGL
+            var canvas = document.getElementById("myCanvas");
+            var gl = canvas.getContext("webgl");
+
+            if (!gl) {
+                alert("Error: Tu navegador no soporta WebGL.");
+                return;
+            }
+
+            // 2. Definir los shaders
+			// Agregar un nuevo atributo para los colores de los vértices y pasar ese valor al fragment shader usando varying.
+			var vertexShaderSource = `
+				attribute vec2 a_position;
+				attribute vec3 a_color;
+				varying vec3 v_color;
+				uniform float u_time;		// Agrego una variable uniforme
+				void main() {
+					// Mover el vértice en el eje X según el tiempo
+                    vec2 position = a_position;
+                    position.y += sin(u_time) * 0.5;
+					gl_Position = vec4(position, 0.0, 1.0);
+					v_color = a_color;
+				}
+			`;
+
+			// Recibir el color interpolado desde el vertex shader y usarlo para definir el color del fragmento.
+			var fragmentShaderSource = `
+				precision mediump float;
+				varying vec3 v_color;
+				void main() {
+					gl_FragColor = vec4(v_color, 1.0); // Usar el color interpolado
+				}
+			`;
+
+            // 3. Crear y compilar los shaders
+            function createShader(gl, type, source) {
+                var shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error("Error al compilar el shader:", gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            var vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
+            var fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
+
+            // 4. Crear el programa y enlazar los shaders
+            var program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error("Error al enlazar el programa:", gl.getProgramInfoLog(program));
+                return;
+            }
+            gl.useProgram(program);
+
+            // 5. Definir los datos del triángulo
+            var positions = new Float32Array([
+                0.0,  0.5,
+               -0.5, -0.5,
+                0.5, -0.5
+            ]);
+			
+			// Agregar colores asociados a cada vértice.
+            var colors = new Float32Array([
+                1.0, 0.0, 0.0,  // Rojo
+                0.0, 1.0, 0.0,  // Verde
+                0.0, 0.0, 1.0   // Azul
+            ]);			
+			
+			
+
+			// 6. Crear un buffer y pasarle los datos
+
+			// Crea un nuevo buffer en la GPU.
+			// Un buffer es una porción de memoria que la GPU utilizará para almacenar datos, como las posiciones de los vértices.
+			var positionBuffer = gl.createBuffer(); 
+
+			// Asocia (o "bindea") este buffer como el buffer de tipo `ARRAY_BUFFER` en la API de WebGL.
+			// `ARRAY_BUFFER` es un tipo de buffer utilizado para almacenar datos de vértices (como posiciones, colores, normales, etc.).
+			// Sólo puede haber un `ARRAY_BUFFER` activo a la vez, y cualquier operación subsiguiente en `ARRAY_BUFFER` afectará al buffer actualmente asociado.
+			gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+
+			// Otros tipos de buffer incluyen:
+			// - `ELEMENT_ARRAY_BUFFER`: utilizado para almacenar índices de vértices, que indican cómo se deben conectar los vértices para formar triángulos.
+			// - `UNIFORM_BUFFER`: utilizado para almacenar datos uniformes que pueden ser compartidos entre shaders.
+			// - `PIXEL_UNPACK_BUFFER` y `PIXEL_PACK_BUFFER`: utilizados para transferir datos de imagen entre la CPU y la GPU, por ejemplo, para operaciones de texturizado.
+
+
+			// Copia los datos del array `positions` (en la CPU) al buffer actualmente asociado en la GPU.
+			// `gl.bufferData` realiza esta copia y asocia estos datos al buffer actual (`positionBuffer` en este caso).
+			// El tercer parámetro, `gl.STATIC_DRAW`, es una sugerencia para la GPU de que estos datos no van a cambiar (son estáticos),
+			// por lo que la GPU puede optimizar el almacenamiento de estos datos.
+			gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW); 
+
+			// 7. Asociar el buffer con el atributo `a_position`
+
+			// Obtiene la ubicación (location) del atributo `a_position` dentro del programa de shaders.
+			// Esta ubicación es un índice que se usa para referenciar el atributo en las siguientes operaciones.
+			var positionAttributeLocation = gl.getAttribLocation(program, "a_position");
+
+			// Habilita el atributo de vértices en la ubicación obtenida (`positionAttributeLocation`).
+			// Esto le dice a WebGL que el atributo `a_position` debe recibir datos de un buffer.
+			gl.enableVertexAttribArray(positionAttributeLocation);
+
+			// Especifica cómo debe interpretarse el buffer actual para llenar el atributo `a_position`.
+			// Aquí le indicamos a WebGL que cada vértice tiene dos componentes (X e Y), que son de tipo `FLOAT`,
+			// no están normalizados (`false`), y que están empaquetados sin espacio entre ellos (`stride` de 0).
+			// El último parámetro (`offset`) indica dónde comienzan los datos dentro del buffer, que en este caso es 0.
+			gl.vertexAttribPointer(positionAttributeLocation, 2, gl.FLOAT, false, 0, 0);
+
+
+			// idem para buffer de colores
+            var colorBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, colorBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, colors, gl.STATIC_DRAW);
+			
+            var colorAttributeLocation = gl.getAttribLocation(program, "a_color");
+            gl.vertexAttribPointer(colorAttributeLocation, 3, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(colorAttributeLocation);			
+			
+			// 2. Obtener la ubicación del uniform `u_time`
+            var timeUniformLocation = gl.getUniformLocation(program, "u_time");		
+
+			// Como la escena ahora es dinámica debido a la animación, no podemos simplemente dibujar una vez y listo.
+			// Para manejar este problema, definimos una función de renderizado que se llamará en cada frame utilizando `requestAnimationFrame`.
+			// Esto nos permite actualizar el tiempo en cada frame, recalcular las posiciones de los vértices en el shader,
+			// y redibujar la escena continuamente, creando la animación.
+			
+			
+			//Función de renderizado
+			// La función de renderizado recibe el tiempo transcurrido (elapsed time) desde que comenzó la animación,
+			// lo que permite calcular el valor de `u_time` en segundos. Este valor se pasa al shader para animar la posición del triángulo.
+			// En cada llamada a la función, se limpia la pantalla, se actualiza la posición del triángulo según el tiempo,
+			// y se vuelve a dibujar la escena. Al final de la función, `requestAnimationFrame` vuelve a llamar a `render`,
+			// lo que crea un loop de animación continuo.
+			
+            function render(time) {
+                // Convertir el tiempo de milisegundos a segundos
+                var timeInSeconds = time * 0.001;
+                
+                // Establecer el valor del uniform `u_time`
+                gl.uniform1f(timeUniformLocation, timeInSeconds);
+
+                // Limpiar la pantalla y dibujar el triángulo
+                gl.clearColor(0.0, 0.0, 0.0, 1.0); // Negro
+                gl.clear(gl.COLOR_BUFFER_BIT);
+                gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+                // Volver a llamar a `render` en el siguiente frame
+                requestAnimationFrame(render);
+            }			
+			
+			// Iniciar la animación
+			//requestAnimationFrame le dice al navegador que deseas realizar una animación, 
+			// y solicita que el navegador ejecute una función específica para actualizar la animación antes del próximo 
+			//repintado de la pantalla. Esto asegura que la animación sea lo más suave posible, sincronizándose con la tasa de refresco 
+			// del monitor (normalmente 60Hz).
+            requestAnimationFrame(render);
+
+        };
+    </script>
+</body>
+</html>

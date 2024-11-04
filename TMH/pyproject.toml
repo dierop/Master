@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "tecnicas_metaheuristicas"
+version = "0.1.0"
+description = ""
+authors = ["Diego Ros"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+notebook = "^7.2.2"
+binarytree = "^6.5.1"
+matplotlib = "^3.9.2"
+
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.4.0"
+ruff = "^0.0.217"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+select = ["E", "W", "F", "I", "C", "B"]
+ignore = ["E501", "B905", "B008"]

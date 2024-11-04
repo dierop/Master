@@ -1,0 +1,11 @@
+Model Information:
+* title:	Cofre del tesoro / Treasure chest
+* source:	https://sketchfab.com/3d-models/cofre-del-tesoro-treasure-chest-2e3fd6aa4e6b424391c1a13dbdffbfdc
+* author:	Frank Bere (https://sketchfab.com/Frank.Bere)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Cofre del tesoro / Treasure chest" (https://sketchfab.com/3d-models/cofre-del-tesoro-treasure-chest-2e3fd6aa4e6b424391c1a13dbdffbfdc) by Frank Bere (https://sketchfab.com/Frank.Bere) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
