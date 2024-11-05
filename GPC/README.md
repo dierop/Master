@@ -1,8 +1,8 @@
-# GPC: Graficos por Computador
+# 💩 GPC: Graficos por Computador
 
 This directory contains projects related to the Graficos por Computador course. The basis of these projects is a fork of WebGL.
 
-## Projects
+## 💻 Projects
 
 Here you will find two main projects developed throughout the course, each demonstrating different techniques and concepts of computer graphics.
 
@@ -20,7 +20,3 @@ Here you will find two main projects developed throughout the course, each demon
 - A WebGL-compatible browser.
 
 - Live Server (VScode extension). Or another alternative for creating local servers.
-
-## 💻 Usage
-
-Execute the html file with the live server extension.

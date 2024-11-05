@@ -1,4 +1,6 @@
-# ♻ Reconocimiento de Formas y Aprendizaje Automático (RFA) 
+# 💩 TMH: Tecnicas Metahuristicas
+
+Source code for TMH subject. The main focus are the usage of algorithms to search for suboptimal solutions to a problem.  In this case Genetic Algorithm and Simulated Annealing to solve how to minimize the difference between two groups of numbers using basic operations.
 
 ## ⚙️ Installation & Setup
 
@@ -15,5 +17,13 @@ poetry run ruff --fix .
 poetry run black .
 ```
 
+## 💻 Projects
 
-## 💻 Usage
+>[!Warning] 
+>Some of the code is mixed between the two projects :S
+
+- __Genetic Algorithm__: Has the code for all the definition of the individuals and the algorithm implementation. It has different types of selection, mutation, replacing, reproducing and some code to try fixing the bad solutions.
+
+- __Enfriamiento Simulado__: Has the code for the implementation of the algorithm. It has different types of neigthbors creation, and annealing.
+
+- __test.ipynb__: Expertiments, test and graphics over the results.
