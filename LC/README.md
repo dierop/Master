@@ -39,5 +39,7 @@ __EJ4__:
 
 - lab4.ipynb: Notebook with word sense disambiguation using lexicon similarity and Word2Vec embeddings.
 
-__Project__:
-__TODO__
+__Proyecto__:
+    Small project for sentiment classification over tweets.
+    - `ficheros/`: Problem definition, input and output files.
+    - source.ipynb: Source code for experiments and project analysis.
