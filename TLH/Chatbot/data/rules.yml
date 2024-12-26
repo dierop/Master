@@ -1,0 +1,33 @@
+version: "3.1"
+
+rules:
+
+- rule: ayuda
+  steps:
+  - intent: bienvenida
+  - action: utter_ayuda
+
+- rule: sugerencia
+  steps:
+  - intent: pide_sugerencia
+  - action: action_sugerir_ingrediente
+
+
+- rule: incluir ingrediente
+  steps:
+  - intent: incluye_ingrediente
+  - action: action_incluir_ingrediente
+
+
+- rule: eliminar ingrediente
+  steps:
+  - intent: elimina_ingrediente
+  - action: action_eliminar_ingrediente
+
+- rule: hacer pedido
+  steps:
+  - intent: hacer_pedido
+  - action: action_hacer_pedido
+  - action: action_restart
+
+  

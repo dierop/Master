@@ -1,0 +1,45 @@
+version: "3.1"
+
+intents:
+  - bienvenida
+  - pide_ayuda
+  - pide_sugerencia
+  - incluye_ingrediente
+  - elimina_ingrediente
+  - hacer_pedido
+
+responses:
+  utter_ayuda:
+  - text: "Hola, ¿Puedo ayudarte a hacer la compra? se anotar ingredientes, sugerir ingrediente y hacer pedidos"
+
+  utter_sugerencia:
+  - text: "¿Qué te parece 'tomate'?"
+  
+  utter_incluye_ingrediente:
+  - text: "¡Claro! Agregué ingrediente a tu lista de compras"
+
+  utter_elimina_ingrediente:
+  - text: "¡Listo! Eliminé ingrediente de tu lista de compras"
+
+  utter_hacer_pedido:
+  - text: "¡Listo! Tu pedido está en camino con ingredientes."
+
+actions:
+  - action_sugerir_ingrediente
+  - action_incluir_ingrediente
+  - action_eliminar_ingrediente
+  - action_hacer_pedido
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+slots:
+  lista_compra:
+    type: list
+    initial_value: []
+    mappings:
+    - type: from_entity
+      entity: producto
+      intent: incluye_ingrediente, elimina_ingrediente
+      not_intent: hacer_pedido, pide_sugerencia, pide_ayuda

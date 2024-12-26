@@ -1,0 +1,77 @@
+version: "3.1"
+
+nlu:
+- intent: bienvenida
+  examples: |
+    - Holis
+    - Hola, ¿cómo estás?
+    - Buenas, ¿qué tal?
+
+- intent: pide_sugerencia
+  examples: |
+    - ¿qué me recomiendas?
+    - ¿qué puedo comprar?
+    - sugiereme algo
+    - no se que comprar
+
+- intent: incluye_ingrediente
+  examples: |
+    - quiero [manzanas](producto)
+    - añade [leche](producto) a la lista
+    - incluye [jamon serrano](producto) en la lista
+    - necesito [pan](producto)
+    - agrega [plátanos](producto) y [pera](producto)
+    - quiero agregar [arroz](producto) y [frijoles](producto)
+    - añadir [queso](producto) y [yogur](producto)
+    - compra [cereal](producto) y [yogur](producto)
+
+- intent: elimina_ingrediente
+  examples: |
+    - elimina [manzanas](producto)
+    - quita [pasas](producto) de la lista
+    - borra [pan](producto)
+    - quiero borrar [plátanos](producto)
+    - no quiero [pasta](producto)
+    - no necesito [almendras](producto)
+    - ya no quiero [leche](producto)
+
+
+- intent: hacer_pedido
+  examples: |
+    - haz mi pedido
+    - quiero acabar mi compra
+    - terminar compra
+
+- lookup: producto
+  examples: |
+    - manzanas
+    - plátanos
+    - leche
+    - pan
+    - arroz
+    - frijoles
+    - queso
+    - yogur
+    - cereal
+    - huevos
+    - mantequilla
+    - azúcar
+    - sal
+    - pimiento
+    - aceite
+    - vinagre
+    - limones
+    - naranjas
+    - fresas
+    - uvas
+    - sandía
+    - chocolate
+    - galletas
+    - pasta
+    - arroz
+    - lentejas
+    - garbanzos
+    - cebolla
+    - pizza
+    - hamburguesa
+    - patatas
