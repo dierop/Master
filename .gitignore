@@ -34,6 +34,7 @@ Thumbs.db
 *.py[cod]
 __pycache__/
 *.so
+.python-version
 
 # Node.js #
 ###########
@@ -44,3 +45,8 @@ yarn-error.log
 # Data #
 ########
 .data/
+
+# RASA #
+########
+.rasa/
+TLH/Chatbot/models/
