@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "rahwisper"
+version = "0.1.0"
+description = ""
+authors = ["Diego Ros"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^2.0.0"
+numpy = "^2.2.1"
+torchaudio = "^2.5.1"
+scipy = "^1.14.1"
+matplotlib = "^3.10.0"
+soundfile = "^0.12.1"
+editdistance = "^0.8.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = {extras = ["jupyter"], version = "^24.8.0"}
+ruff = "^0.0.217"
+ipykernel = "^6.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+select = ["E", "W", "F", "I", "C", "B"]
+ignore = ["E501", "B905", "B008"]
