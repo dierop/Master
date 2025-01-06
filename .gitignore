@@ -46,8 +46,12 @@ yarn-error.log
 ########
 .data/
 
-# RASA #
+# TLH #
 ########
 .rasa/
 TLH/Chatbot/models/
 TLH/whisp/
+TLH/RAHWhisper/fechas1/test/
+TLH/RAHWhisper/fechas1/train/
+TLH/RAHWhisper/noise/musan_small/
+TLH/RAHWhisper/noise/RIRS_NOISES_small/
