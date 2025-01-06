@@ -53,5 +53,7 @@ TLH/Chatbot/models/
 TLH/whisp/
 TLH/RAHWhisper/fechas1/test/
 TLH/RAHWhisper/fechas1/train/
-TLH/RAHWhisper/noise/musan_small/
-TLH/RAHWhisper/noise/RIRS_NOISES_small/
+TLH/RAHWhisper/noise/
+TLH/RAHWhisper/model_24.pt
+TLH/RAHWhisper/tokenizer_24.pth
+TLH/RAHWhisper/fechas1/fechas1.zip
