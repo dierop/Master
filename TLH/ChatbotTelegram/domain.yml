@@ -1,0 +1,51 @@
+version: "3.1"
+
+intents:
+  - bienvenida
+  - pide_ayuda
+  - pide_sugerencia
+  - incluye_ingrediente
+  - elimina_ingrediente
+  - hacer_pedido
+  - get_supermercados
+  - set_supermercado
+  - get_productos_categoria
+  - get_categorias
+  - get_productos_precio
+  - buscar_producto
+
+responses:
+  utter_saludo:
+  - text: "Hola, soy un bot asistente de compras. ¿En qué puedo ayudarte?"
+
+  utter_ayuda:
+  - text: "Puedo ayudarte a hacer una lista de compras en varios supermercados, sugerirte ingredientes de diferentes formas y hacer el pedido."
+
+actions:
+  - action_incluir_producto
+  - action_eliminar_ingrediente
+  - action_hacer_pedido
+  - action_preguntar_supermercado
+  - action_set_supermercado
+  - action_sugerir_producto
+  - action_sugerir_por_categoria
+  - action_sugerir_por_precio
+  - action_buscar_categoria
+  - action_get_categorias
+  - action_buscar_producto
+
+
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+slots:
+  lista_compra:
+    type: list
+    initial_value: []
+    mappings:
+    - type: from_entity
+      entity: producto
+      intent: incluye_ingrediente, elimina_ingrediente
+      not_intent: hacer_pedido, pide_sugerencia, pide_ayuda

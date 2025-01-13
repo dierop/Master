@@ -1,0 +1,99 @@
+stories:
+- story: compra no encontrada
+  steps:
+    - intent: incluye_ingrediente
+    - action: action_incluir_producto
+    - intent: buscar_producto
+    - action: action_buscar_producto
+
+- story: compra encontrada
+  steps:
+    - intent: incluye_ingrediente
+    - action: action_incluir_producto
+
+- story: eliminar ingrediente
+  steps:
+    - intent: elimina_ingrediente
+    - action: action_eliminar_ingrediente
+
+- story: eliminar ingrediente no encontrado
+  steps:
+    - intent: elimina_ingrediente
+    - action: action_eliminar_ingrediente
+    - intent: buscar_producto
+    - action: action_buscar_producto
+
+- story: buscar producto sin supermetcado
+  steps:
+    - intent: buscar_producto
+    - action: action_buscar_producto
+    - intent: set_supermercado
+    - action: action_set_supermercado
+  
+- story: buscar por categoria
+  steps:
+    - intent: get_productos_categoria
+    - action: action_sugerir_por_categoria
+    - intent: incluye_ingrediente
+    - action: action_incluir_producto
+
+- story: buscar por categoria no encontrada
+  steps:
+    - intent: get_productos_categoria
+    - action: action_sugerir_por_categoria
+    - intent: get_categorias
+    - action: action_get_categorias
+  
+- story: buscar categorias
+  steps:
+    - intent: get_categorias
+    - action: action_get_categorias
+    - intent: get_productos_categoria
+    - action: action_sugerir_por_categoria
+
+- story: buscar por precio
+  steps:
+    - intent: get_productos_precio
+    - action: action_sugerir_por_precio
+    - intent: incluye_ingrediente
+    - action: action_incluir_producto
+
+- story: happy path
+  steps:
+    - intent: bienvenida
+    - action: utter_saludo
+    - intent: pide_ayuda
+    - action: utter_ayuda
+    - intent: get_supermercados
+    - action: action_preguntar_supermercado
+    - intent: set_supermercado
+    - action: action_set_supermercado
+    - intent: get_productos_categoria
+    - action: action_sugerir_por_categoria
+    - intent: incluye_ingrediente
+    - action: action_incluir_producto
+    - intent: hacer_pedido
+    - action: action_hacer_pedido
+    - action: action_restart
+
+- story: happy path 2
+  steps:
+    - intent: bienvenida
+    - action: utter_saludo
+    - intent: pide_ayuda
+    - action: utter_ayuda
+    - intent: get_supermercados
+    - action: action_preguntar_supermercado
+    - intent: set_supermercado
+    - action: action_set_supermercado
+    - intent: get_productos_precio
+    - action: action_sugerir_por_precio
+    - intent: incluye_ingrediente
+    - action: action_incluir_producto
+    - intent: incluye_ingrediente
+    - action: action_incluir_producto
+    - intent: elimina_ingrediente
+    - action: action_eliminar_ingrediente
+    - intent: hacer_pedido
+    - action: action_hacer_pedido
+    - action: action_restart

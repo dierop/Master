@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "chatbottelegram"
+version = "0.1.0"
+description = ""
+authors = ["Diego Ros"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "3.9.21"
+rasa = {extras = ["spacy"], version = "^3.6"}
+pandas = "^2.2.3"
+aiogram = "2.25.2"
+aiohttp = "3.8.0"
+ipykernel = "^6.29.5"
+
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+select = ["E", "W", "F", "I", "C", "B"]
+ignore = ["E501", "B905", "B008"]

@@ -1,0 +1,66 @@
+version: "3.1"
+
+rules:
+- rule: saludo
+  steps:
+  - intent: bienvenida
+  - action: utter_saludo
+
+- rule: ayuda
+  steps:
+  - intent: pide_ayuda
+  - action: utter_ayuda
+
+- rule: sugerencia
+  steps:
+  - intent: pide_sugerencia
+  - action: action_sugerir_producto
+
+- rule: sugerencia por categoria
+  steps:
+  - intent: get_productos_categoria
+  - action: action_sugerir_por_categoria
+
+- rule: sugerencia por precio
+  steps:
+  - intent: get_productos_precio
+  - action: action_sugerir_por_precio
+
+
+- rule: set supermercado
+  steps:
+  - intent: set_supermercado
+  - action: action_set_supermercado
+
+- rule: get supermercados
+  steps:
+  - intent: get_supermercados
+  - action: action_preguntar_supermercado
+
+- rule: get categorias
+  steps:
+  - intent: get_categorias
+  - action: action_get_categorias
+
+- rule: buscar producto
+  steps:
+  - intent: buscar_producto
+  - action: action_buscar_producto
+
+- rule: incluir ingrediente
+  steps:
+  - intent: incluye_ingrediente
+  - action: action_incluir_producto
+
+- rule: eliminar ingrediente
+  steps:
+  - intent: elimina_ingrediente
+  - action: action_eliminar_ingrediente
+
+- rule: hacer pedido
+  steps:
+  - intent: hacer_pedido
+  - action: action_hacer_pedido
+  - action: action_restart
+
+  
