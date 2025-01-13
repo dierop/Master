@@ -56,4 +56,6 @@ TLH/RAHWhisper/fechas1/train/
 TLH/RAHWhisper/noise/
 TLH/RAHWhisper/model_24.pt
 TLH/RAHWhisper/tokenizer_24.pth
-TLH/RAHWhisper/fechas1/fechas1.zip
+*.zip
+TLH/ChatbotTelegram/productos-de-supermercado-sample.csv
+TLH/ChatbotTelegram/models/20250110-182853-blocking-hearth.tar.gz
