@@ -10,6 +10,8 @@ package-mode = false
 python = "^3.9"
 spade="4.0.0rc4"
 click="^8.1.0"
+matplotlib = "3.9.4"
+pandas = "^2.2.3"
 
 
 [tool.poetry.group.dev.dependencies]
