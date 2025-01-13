@@ -1,8 +1,12 @@
-import torch
 import random
-import numpy as np
+import re
+from datetime import datetime, timedelta
 
-def seed_everything(seed):      
+import numpy as np
+import torch
+
+
+def seed_everything(seed):
     random.seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
@@ -10,21 +14,18 @@ def seed_everything(seed):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = True
 
+
 def read_file(path: str):
-    files=[]
-    text=[]
-    with open(path, 'r') as file:
-        data=file.readlines()
+    files = []
+    text = []
+    with open(path, "r") as file:
+        data = file.readlines()
         for line in data:
-            line=line.strip().split(',')
+            line = line.strip().split(",")
             files.append(line[0])
             text.append(line[1])
     return files[1:], text[1:]
-            
-    
 
-from datetime import datetime, timedelta
-import re
 
 def parse_date_with_prompt(prompt_text):
     """
@@ -45,7 +46,9 @@ def parse_date_with_prompt(prompt_text):
 
     # Parse the initial date
     base_date = datetime.strptime(date_str, "%d/%m/%y")
-    day_match = re.search(r"(lunes|martes|miércoles|jueves|viernes|sábado|domingo)", instructions)
+    day_match = re.search(
+        r"(lunes|martes|miércoles|jueves|viernes|sábado|domingo)", instructions
+    )
 
     # Interpret the instructions
     if "pasado mañana" in instructions or "par" in instructions:
@@ -56,7 +59,15 @@ def parse_date_with_prompt(prompt_text):
         result_date = base_date + timedelta(days=3)
     elif day_match:
         target_day = day_match.group(1)
-        days_of_week = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+        days_of_week = [
+            "lunes",
+            "martes",
+            "miércoles",
+            "jueves",
+            "viernes",
+            "sábado",
+            "domingo",
+        ]
         current_day_index = base_date.weekday()
         target_day_index = days_of_week.index(target_day)
         delta_days = (target_day_index - current_day_index + 7) % 7
@@ -68,6 +79,7 @@ def parse_date_with_prompt(prompt_text):
 
     # Return the resulting date in the desired format
     return result_date.strftime("%d/%m/%y")
+
 
 def generate_random_date(start_date="01/01/00", end_date="31/12/60"):
     """
