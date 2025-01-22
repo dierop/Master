@@ -22,7 +22,7 @@
 - Elastic Transform 99.29  in epoch  45
 - Augmix 99.14% in epoch  32
 - da4 99.16  in epoch  48
-- 99.46  in epoch  46
+- da5 99.46  in epoch  46
 
 
 
