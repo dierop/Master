@@ -1,0 +1,33 @@
+[tool.poetry]
+name = "traduccion_jap_en"
+version = "0.1.0"
+description = ""
+authors = ["Diego Ros"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+# datasets = "^3.0.0"
+# transformers = "^4.45.0"
+# accelerate = "^1.0.0"
+# peft = "^0.10.0"
+# bitsandbytes = "^0.45.0"
+# sacrebleu = "^2.0.0"
+# evaluate = "^0.4.3"
+# huggingface-hub = {extras = ["cli"], version = "^0.27.0"}
+
+
+[tool.poetry.group.dev.dependencies]
+black = {extras = ["jupyter"], version = "^24.8.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+select = ["E", "W", "F", "I", "C", "B"]
+ignore = ["E501", "B905", "B008"]
+
