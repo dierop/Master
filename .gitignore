@@ -59,3 +59,13 @@ TLH/RAHWhisper/tokenizer_24.pth
 *.zip
 TLH/ChatbotTelegram/productos-de-supermercado-sample.csv
 TLH/ChatbotTelegram/models/20250110-182853-blocking-hearth.tar.gz
+
+
+
+APIA/StableDifussion/*
+VC/gender/x_test.npy
+VC/gender/x_train.npy
+VC/gender/y_test.npy
+VC/gender/y_train.npy
+VC/segmentation/images.npy
+VC/segmentation/masks.npy

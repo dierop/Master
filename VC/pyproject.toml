@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "vc"
+version = "0.1.0"
+description = ""
+authors = ["Diego Ros"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "^2.0.0"
+torchvision = "^0.20.1"
+tqdm = "^4.67.1"
+matplotlib = "^3.10.1"
+
+
+[tool.poetry.group.dev.dependencies]
+black = {extras = ["jupyter"], version = "^24"}
+ruff = "^0.0.217"
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 88
+select = ["E", "W", "F", "I", "C", "B"]
+ignore = ["E501", "B905", "B008"]
